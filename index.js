@@ -27,4 +27,4 @@ app.delete('/api/recipes/:id',auth,(q,s)=>{db.recipes=db.recipes.filter(r=>!(r.i
 app.get('/api/analytics',auth,(q,s)=>{const rs=db.recipes.filter(r=>r.userId===q.uid).map(rCost);const avg=rs.length?rs.reduce((a,r)=>a+r.totalCost,0)/rs.length:0;const sorted=[...rs].sort((a,b)=>b.profitMargin-a.profitMargin);s.json({totalRecipes:rs.length,avgPlateCost:avg,topRecipes:sorted.slice(0,5),allRecipes:rs});});
 app.put('/api/settings',auth,(q,s)=>{const x=db.users.findIndex(u=>u.id===q.uid);if(x<0)return s.status(404).json({error:'Not found'});const{name,restaurantName}=q.body;db.users[x]={...db.users[x],name:name||db.users[x].name,restaurantName:restaurantName||db.users[x].restaurantName};save();s.json({ok:true});});
 app.get('*',(q,s)=>s.sendFile(path.join(PUB,'index.html')));
-app.listen(3000,()=>console.log('FCA running on 3000'));
+app.listen(process.env.PORT||3000,()=>console.log('FCA running on '+(process.env.PORT||3000)));
