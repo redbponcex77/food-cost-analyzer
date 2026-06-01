@@ -1,0 +1,12 @@
+{
+  "name": "food-cost-analyzer",
+  "version": "1.0.0",
+  "description": "Restaurant Food Cost Tracking App for restaurantmargins.com",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
